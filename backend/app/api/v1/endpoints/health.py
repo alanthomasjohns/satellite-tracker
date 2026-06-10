@@ -1,12 +1,10 @@
 from fastapi import APIRouter
+from app.services.health_service import HealthService
 
-router = APIRouter()
+router = APIRouter(tags=["Health"])
+health_service = HealthService()
 
 
 @router.get("/health")
 def health_check():
-    return {
-        "status": "healthy",
-        "service": "satellite-tracker",
-        "version": "0.1.0",
-    }
+    return health_service.get_status()
